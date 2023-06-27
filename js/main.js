@@ -1,115 +1,105 @@
+
+
 //Arrays productos
 
 let productos = [
-  {id: 1, nombre: "iphone SE", version: "2020", precio: 220},
-  {id: 2, nombre: "iphone XS", version: "2019", precio: 320},
-  {id: 3, nombre: "iphone XR", version: "2019", precio: 420},
-  {id: 4, nombre: "iphone 11", version: "2020", precio: 520},
-  {id: 5, nombre: "iphone 11 PRO", version: "2021", precio: 570},
-  {id: 6, nombre: "iphone 11 PRO MAX", version: "2021", precio: 600},
-  {id: 7, nombre: "iphone 12 PRO", version: "2022", precio: 620},
-  {id: 8, nombre: "iphone 13 PRO MAX", version: "2022", precio: 670},
-  {id: 9, nombre: "iphone 14", version: "2023", precio: 800},
-  {id: 10, nombre: "iphone 14 PRO MAX", version: "2023", precio: 1000}
+  {id: 1, nombre: "iphone SE", version: "2020", precio: 220, rutaImagen:"iphone-se.jpeg"},
+  {id: 2, nombre: "iphone XS", version: "2019", precio: 320, rutaImagen:"iphone-xs.jpeg"},
+  {id: 3, nombre: "iphone XR", version: "2019", precio: 420, rutaImagen:"iphone-xr.jpeg"},
+  {id: 4, nombre: "iphone 11", version: "2020", precio: 520, rutaImagen:"iphone-11.jpeg"},
+  {id: 5, nombre: "iphone 11 PRO", version: "2021", precio: 570, rutaImagen:"iphone-11-pro.jpeg"},
+  {id: 6, nombre: "iphone 11 PRO MAX", version: "2021", precio: 600, rutaImagen:"iphone-11-pro-max.jpeg"},
+  {id: 7, nombre: "iphone 12 PRO", version: "2022", precio: 620, rutaImagen:"iphone12-pro.jpeg"},
+  {id: 8, nombre: "iphone 13 PRO MAX", version: "2022", precio: 670, rutaImagen:"iphone13-promax.jpeg"},
+  {id: 9, nombre: "iphone 14", version: "2023", precio: 800, rutaImagen:"iphone14.jpeg"},
+  {id: 10, nombre: "iphone 14 PRO MAX", version: "2023", precio: 1000, rutaImagen:"iphone14-promax.jpeg"}
 ]
 
 
 
 let carrito = []
 
-/* function listado(){
-  let listado = ""
-  productos.forEach(producto => {
-    listado += `Nombre: ${producto.nombre} - Precio: ${producto.precio}$ - ID: ${producto.id}\n`
-  })
-
-  alert(listado)
-} */
-
-function agregarAlCarrito(){
-  elegirProducto = Number(prompt("indique el ID del producto a agregar!!!"))
-  const productoElegido = productos.find(producto => producto.id === elegirProducto)
-     if(productoElegido){
-       carrito.push(productoElegido)
-       alert(`${productoElegido.nombre} Se ha agregado correctamente!!`)
-     }else{
-       alert("no existe ese id")
-     }
-  }
-
-  function totalProductos(){
-    let total = 0
-    carrito.forEach((producto) => total += producto.precio)
-    alert(`Su precio total es: ${total}`)
-   }
-
-
-
-
-/*  function finalizarCompra(){
-  alert(`Su carrito contiene: ${carrito.nombre} - ${carrito.precio}\n`)
- } */
-
-
-/*  opciones() */
-
-/*   function opciones(){
-  while (true){
-    let mensaje = "ELIJA SU OPCION\n1-Ver listado de productos\n2-agregar al carrito\n3-Ver total a pagar\n4-Finalizar compra\n5-salir"
-    let numero = Number(prompt(`${mensaje}`))
-
-    if (numero === 1){
-      listado()
-    }
-    else if(numero === 2 ){
-      agregarAlCarrito()
-  }
-    else if(numero === 3){
-      totalProductos()
-    }
-    
-    else if(numero === 4){
-      finalizarCompra()
-    }
-        else if(numero === 5){
-      break
-    }
-    
-    else{
-      alert("Porfavor elegi una opcion valida!!")
-    }
-
-
-}
-} */
-
-
-
-
-
+renderizar(productos)
 function renderizar(ArrayDeProductos){
   let contenedor = document.getElementById("container")
   contenedor.innerHTML = ""
 
-  ArrayDeProductos.forEach(productos => {
-  
+  ArrayDeProductos.forEach(producto => {
     let cardProductos = document.createElement("div")
 
     cardProductos.classList.add("card")
     
     cardProductos.innerHTML = `
     <h2 class="title">${producto.nombre}</h2>
-    <div class="imagen-producto"></div>
+    <img class="imagen-producto" src="../img/${producto.rutaImagen}">
     <p class="title-precio">$${producto.precio}</p>
-    <button id="${producto.id}" class="btn">Agregar al Carrito</button>
+    <button class="btn" id="${producto.id}">Agregar al Carrito</button>
     `
+    contenedor.append(cardProductos)
 
-    contenedor.appendChild(cardProductos)
-    let botonAgregarAlCarrito = document.getElementById(producto.id)
-    botonAgregarAlCarrito.addEventListener("click", (e) => console.log(e.target.id))
+    let AgregarProductoCarrito = document.getElementById(producto.id)
+    AgregarProductoCarrito.addEventListener("click", (e) => {
+      e.preventDefault()
+      carrito.push({
+        rutaImagen: producto.rutaImagen,
+        nombre: producto.nombre,
+        precio: producto.precio,
+      })
+      let carritoContainer = document.getElementById("carritoContainer")
+      let carritoHeader = document.createElement("div")
+      carritoHeader.classList.add("header-carrito")
+      carritoHeader.innerHTML=`
+        <h3 class="title-carrito">carrito</h3>
+      `
+      carritoContainer.append(carritoHeader)
+
+      
+      let carritoContent = document.createElement("div")
+      carritoContent.classList.add("carrito-content")
+      carritoContent.innerHTML= `
+      <img class="imagen-producto" src="../img/${producto.rutaImagen}">
+      <h2 class="title">${producto.nombre}</h2>
+      <p class="title-precio">$${producto.precio}</p>
+      `
+      
+      carritoContainer.append(carritoContent)
+      
+      
+        
+      let total = carrito.reduce((acc, el) => acc + el.precio, 0)
+
+      let carritoFooter = document.createElement("div")
+      carritoFooter.classList.add("carrito-footer")
+      carritoFooter.innerHTML=`
+        <p class="title-precio">Su total a pagar es: ${total}</p>
+      `
+
+      carritoContainer.append(carritoFooter)
+
+      
+    })
   })
-
- 
 }
 
-renderizar(productos)
+
+
+
+
+
+const abrirCarrito = document.getElementById("verCarrito")
+
+  abrirCarrito.addEventListener("click", () => {
+  carritoContainer.classList.toggle("oculto")
+})
+
+
+
+
+
+/* <div class="carrito-content">
+</div>
+  */
+
+
+
+
