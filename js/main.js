@@ -3,16 +3,16 @@
 //Arrays productos
 
 let productos = [
-  {id: 1, nombre: "iphone SE", version: "2020", precio: 220, rutaImagen:"iphone-se.jpeg"},
-  {id: 2, nombre: "iphone XS", version: "2019", precio: 320, rutaImagen:"iphone-xs.jpeg"},
-  {id: 3, nombre: "iphone XR", version: "2019", precio: 420, rutaImagen:"iphone-xr.jpeg"},
-  {id: 4, nombre: "iphone 11", version: "2020", precio: 520, rutaImagen:"iphone-11.jpeg"},
-  {id: 5, nombre: "iphone 11 PRO", version: "2021", precio: 570, rutaImagen:"iphone-11-pro.jpeg"},
-  {id: 6, nombre: "iphone 11 PRO MAX", version: "2021", precio: 600, rutaImagen:"iphone-11-pro-max.jpeg"},
-  {id: 7, nombre: "iphone 12 PRO", version: "2022", precio: 620, rutaImagen:"iphone12-pro.jpeg"},
-  {id: 8, nombre: "iphone 13 PRO MAX", version: "2022", precio: 670, rutaImagen:"iphone13-promax.jpeg"},
-  {id: 9, nombre: "iphone 14", version: "2023", precio: 800, rutaImagen:"iphone14.jpeg"},
-  {id: 10, nombre: "iphone 14 PRO MAX", version: "2023", precio: 1000, rutaImagen:"iphone14-promax.jpeg"}
+  {id: 1, nombre: "iphone SE", version: "2020", precio: 220, rutaImagen:"iphone-se.png"},
+  {id: 2, nombre: "iphone XS", version: "2019", precio: 320, rutaImagen:"iphone-xs.png"},
+  {id: 3, nombre: "iphone XR", version: "2019", precio: 420, rutaImagen:"iphone-xr.png"},
+  {id: 4, nombre: "iphone 11", version: "2020", precio: 520, rutaImagen:"iphone-11.png"},
+  {id: 5, nombre: "iphone 11 PRO", version: "2021", precio: 570, rutaImagen:"iphone-11-pro.png"},
+  {id: 6, nombre: "iphone 11 PRO MAX", version: "2021", precio: 600, rutaImagen:"iphone-11-pro-max.png"},
+  {id: 7, nombre: "iphone 12 PRO", version: "2022", precio: 620, rutaImagen:"iphone12-pro.png"},
+  {id: 8, nombre: "iphone 13 PRO MAX", version: "2022", precio: 670, rutaImagen:"iphone13-promax.png"},
+  {id: 9, nombre: "iphone 14", version: "2023", precio: 800, rutaImagen:"iphone14.png"},
+  {id: 10, nombre: "iphone 14 PRO MAX", version: "2023", precio: 1000, rutaImagen:"iphone14-promax.png"}
 ]
 
 
@@ -45,36 +45,42 @@ function renderizar(ArrayDeProductos){
         nombre: producto.nombre,
         precio: producto.precio,
       })
-      let carritoContainer = document.getElementById("carritoContainer")
-      let carritoHeader = document.createElement("div")
-      carritoHeader.classList.add("header-carrito")
-      carritoHeader.innerHTML=`
-        <h3 class="title-carrito">carrito</h3>
-      `
-      carritoContainer.append(carritoHeader)
 
-      
+      let total = carrito.reduce((acc, el) => acc + el.precio, 0)
+
+      let carritoContainer = document.getElementById("carritoContainer")
+
       let carritoContent = document.createElement("div")
       carritoContent.classList.add("carrito-content")
       carritoContent.innerHTML= `
-      <img class="imagen-producto" src="../img/${producto.rutaImagen}">
+      <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
       <h2 class="title">${producto.nombre}</h2>
       <p class="title-precio">$${producto.precio}</p>
       `
       
-      carritoContainer.append(carritoContent)
+      carritoContainer.append(carritoContent) 
       
-      
-        
-      let total = carrito.reduce((acc, el) => acc + el.precio, 0)
 
-      let carritoFooter = document.createElement("div")
-      carritoFooter.classList.add("carrito-footer")
-      carritoFooter.innerHTML=`
-        <p class="title-precio">Su total a pagar es: ${total}</p>
+      let mostrarTotal = document.getElementById("total")
+      mostrarTotal.innerHTML=`
+      El total de tu carrito es: $${total}
       `
 
-      carritoContainer.append(carritoFooter)
+      carritoContainer.append(mostrarTotal)
+
+
+
+      
+        
+     
+
+/*       let carritoFooter = document.createElement("div")
+      carritoFooter.classList.add("carrito-footer")
+      carritoFooter.innerHTML=`
+        
+      `
+
+      carritoContainer.append(carritoFooter) */
 
       
     })
@@ -91,15 +97,3 @@ const abrirCarrito = document.getElementById("verCarrito")
   abrirCarrito.addEventListener("click", () => {
   carritoContainer.classList.toggle("oculto")
 })
-
-
-
-
-
-/* <div class="carrito-content">
-</div>
-  */
-
-
-
-

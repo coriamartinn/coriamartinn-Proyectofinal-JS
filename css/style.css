@@ -126,15 +126,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: absolute;
     right: 0;
     top: 0;
     margin: 5.5rem 1rem;
     padding: 2rem;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .9);
-/*     overflow-y: scroll;
-    overflow-x: hidden; */
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -144,9 +144,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     margin: 1rem 0;
-    overflow-y: hidden;
+    padding: 1.2rem;
+    border-radius: 2rem;
 }
 
 
@@ -154,6 +155,7 @@
 .title-carrito {
     font-size: 2rem;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .cerrar-boton {
@@ -167,4 +169,28 @@
 
 .oculto {
     display: none;
+}
+
+
+
+
+.carrito-container .productos-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+
+.imagen-carrito{
+    width: 100px;
+    height: 100px;
+}
+
+
+.total-carrito {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
 }
