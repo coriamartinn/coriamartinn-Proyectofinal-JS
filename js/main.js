@@ -67,22 +67,6 @@ function renderizar(ArrayDeProductos){
       `
 
       carritoContainer.append(mostrarTotal)
-
-
-
-      
-        
-     
-
-/*       let carritoFooter = document.createElement("div")
-      carritoFooter.classList.add("carrito-footer")
-      carritoFooter.innerHTML=`
-        
-      `
-
-      carritoContainer.append(carritoFooter) */
-
-      
     })
   })
 }
