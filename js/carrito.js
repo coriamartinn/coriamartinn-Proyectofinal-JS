@@ -23,6 +23,7 @@ let carritoContainer = document.getElementById("carritoContainer")
 
 let carrito = []
 
+let cardProductos
 
 renderizar(productos)
 
@@ -41,9 +42,11 @@ function renderizar(ArrayDeProductos){
     `
     contenedor.append(cardProductos)
 
-
+    
   })
 }
+
+agregarAlCarrito()
 
 
 function agregarAlCarrito(){
@@ -91,6 +94,8 @@ function agregarAlCarrito(){
     carritoContainer.append(mostrarTotal)
   })
 }
+
+
 
 const eliminarProducto = () => {
   const foundId = carrito.find(elemento => elemento.id)
