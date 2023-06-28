@@ -194,3 +194,9 @@
     font-weight: bold;
     margin-top: 1rem;
 }
+
+
+
+.eliminar-producto{
+    cursor: pointer;
+}

@@ -15,13 +15,18 @@ let productos = [
   {id: 10, nombre: "iphone 14 PRO MAX", version: "2023", precio: 1000, rutaImagen:"iphone14-promax.png"}
 ]
 
+let contenedor = document.getElementById("container")
+let carritoContainer = document.getElementById("carritoContainer")
+
+
 
 
 let carrito = []
 
+
 renderizar(productos)
+
 function renderizar(ArrayDeProductos){
-  let contenedor = document.getElementById("container")
   contenedor.innerHTML = ""
 
   ArrayDeProductos.forEach(producto => {
@@ -33,45 +38,69 @@ function renderizar(ArrayDeProductos){
     <h2 class="title">${producto.nombre}</h2>
     <img class="imagen-producto" src="../img/${producto.rutaImagen}">
     <p class="title-precio">$${producto.precio}</p>
-    <button class="btn" id="${producto.id}">Agregar al Carrito</button>
     `
     contenedor.append(cardProductos)
 
-    let AgregarProductoCarrito = document.getElementById(producto.id)
-    AgregarProductoCarrito.addEventListener("click", (e) => {
-      e.preventDefault()
-      carrito.push({
-        rutaImagen: producto.rutaImagen,
-        nombre: producto.nombre,
-        precio: producto.precio,
-      })
-
-      let total = carrito.reduce((acc, el) => acc + el.precio, 0)
-
-      let carritoContainer = document.getElementById("carritoContainer")
-
-      let carritoContent = document.createElement("div")
-      carritoContent.classList.add("carrito-content")
-      carritoContent.innerHTML= `
-      <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
-      <h2 class="title">${producto.nombre}</h2>
-      <p class="title-precio">$${producto.precio}</p>
-      `
-      
-      carritoContainer.append(carritoContent) 
-      
-
-      let mostrarTotal = document.getElementById("total")
-      mostrarTotal.innerHTML=`
-      El total de tu carrito es: $${total}
-      `
-
-      carritoContainer.append(mostrarTotal)
-    })
+    agregarAlCarrito()
   })
 }
 
 
+function agregarAlCarrito(){
+  let AgregarProductoCarrito = document.createElement("button")
+  AgregarProductoCarrito.classList.add("btn")
+  AgregarProductoCarrito.innerText = "Agregar al Carrito"
+  cardProductos.append(AgregarProductoCarrito)
+
+  AgregarProductoCarrito.addEventListener("click", (e) => {
+    e.preventDefault()
+    carrito.push({
+      rutaImagen: producto.rutaImagen,
+      nombre: producto.nombre,
+      precio: producto.precio,
+    })
+
+    let total = carrito.reduce((acc, el) => acc + el.precio, 0)
+
+    
+
+    let carritoContent = document.createElement("div")
+    carritoContent.classList.add("carrito-content")
+    carritoContent.innerHTML= `
+    <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
+    <h2 class="title">${producto.nombre}</h2>
+    <p class="title-precio">$${producto.precio}</p>
+    `
+    
+    carritoContainer.append(carritoContent)
+    
+    let eliminar = document.createElement("span")
+    eliminar.innerText ="❌"
+    eliminar.classList.add("eliminar-producto")
+    carritoContent.append(eliminar)
+
+    eliminar.addEventListener("click", eliminarProducto)
+
+
+
+    let mostrarTotal = document.getElementById("total")
+    mostrarTotal.innerHTML=`
+    El total de tu carrito es: $${total}
+    `
+
+    carritoContainer.append(mostrarTotal)
+  })
+}
+
+const eliminarProducto = () => {
+  const foundId = carrito.find(elemento => elemento.id)
+
+  const carritoP = carrito.filter(carritoId => {
+    return carritoId !== foundId
+  })
+
+  renderizar()
+}
 
 
 
