@@ -41,7 +41,7 @@ function renderizar(ArrayDeProductos){
     `
     contenedor.append(cardProductos)
 
-    agregarAlCarrito()
+
   })
 }
 
