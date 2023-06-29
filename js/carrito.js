@@ -6,12 +6,14 @@ const cantidadContador = () => {
 }
 cantidadContador()
 
-
-const abrirCarrito = document.getElementById("verCarrito")
+const abrirYcerrarCarrito = () => {
+  const abrirCarrito = document.getElementById("verCarrito")
 
   abrirCarrito.addEventListener("click", () => {
   carritoContainer.classList.toggle("oculto")
-})
+  })
+}
+abrirYcerrarCarrito()
 
 
 
@@ -76,6 +78,11 @@ const mostrarCarrito = () => {
   contenedorDelTotal.classList.add("title-total")
   mostrarTotal(contenedorDelTotal)
   contenedorCarrito.append(contenedorDelTotal)
+
+  const finalizarCompra = document.createElement("button")
+  finalizarCompra.classList.add("boton-finalizar")
+  finalizarCompra.innerText ="Checkout"
+  contenedorCarrito.append(finalizarCompra)
 
   carrito.forEach((producto) => {
     const li = document.createElement("li")
