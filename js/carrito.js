@@ -23,10 +23,8 @@ let carritoContainer = document.getElementById("carritoContainer")
 
 let carrito = []
 
-let cardProductos
 
 renderizar(productos)
-
 function renderizar(ArrayDeProductos){
   contenedor.innerHTML = ""
 
@@ -39,63 +37,53 @@ function renderizar(ArrayDeProductos){
     <h2 class="title">${producto.nombre}</h2>
     <img class="imagen-producto" src="../img/${producto.rutaImagen}">
     <p class="title-precio">$${producto.precio}</p>
+    <button class="btn" id="${producto.id}">Agregar al Carrito</button>
     `
     contenedor.append(cardProductos)
 
-    
-  })
-}
+    let AgregarProductoCarrito = document.getElementById(producto.id)
+    AgregarProductoCarrito.addEventListener("click", (e) => {
+      e.preventDefault()
+      carrito.push({
+        rutaImagen: producto.rutaImagen,
+        nombre: producto.nombre,
+        precio: producto.precio,
+      })
 
-agregarAlCarrito()
+      let total = carrito.reduce((acc, el) => acc + el.precio, 0)
+
+      
+
+      let carritoContent = document.createElement("div")
+      carritoContent.classList.add("carrito-content")
+      carritoContent.innerHTML= `
+      <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
+      <h2 class="title">${producto.nombre}</h2>
+      <p class="title-precio">$${producto.precio}</p>
+      `
+      
+      carritoContainer.append(carritoContent)
+      
+      let eliminar = document.createElement("span")
+      eliminar.innerText ="❌"
+      eliminar.classList.add("eliminar-producto")
+      carritoContent.append(eliminar)
+
+      eliminar.addEventListener("click", eliminarProducto)
 
 
-function agregarAlCarrito(){
-  let AgregarProductoCarrito = document.createElement("button")
-  AgregarProductoCarrito.classList.add("btn")
-  AgregarProductoCarrito.innerText = "Agregar al Carrito"
-  cardProductos.append(AgregarProductoCarrito)
 
-  AgregarProductoCarrito.addEventListener("click", (e) => {
-    e.preventDefault()
-    carrito.push({
-      rutaImagen: producto.rutaImagen,
-      nombre: producto.nombre,
-      precio: producto.precio,
+      let mostrarTotal = document.getElementById("total")
+      mostrarTotal.innerHTML=`
+      El total de tu carrito es: $${total}
+      `
+
+      carritoContainer.append(mostrarTotal)
+
+
     })
-
-    let total = carrito.reduce((acc, el) => acc + el.precio, 0)
-
-    
-
-    let carritoContent = document.createElement("div")
-    carritoContent.classList.add("carrito-content")
-    carritoContent.innerHTML= `
-    <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
-    <h2 class="title">${producto.nombre}</h2>
-    <p class="title-precio">$${producto.precio}</p>
-    `
-    
-    carritoContainer.append(carritoContent)
-    
-    let eliminar = document.createElement("span")
-    eliminar.innerText ="❌"
-    eliminar.classList.add("eliminar-producto")
-    carritoContent.append(eliminar)
-
-    eliminar.addEventListener("click", eliminarProducto)
-
-
-
-    let mostrarTotal = document.getElementById("total")
-    mostrarTotal.innerHTML=`
-    El total de tu carrito es: $${total}
-    `
-
-    carritoContainer.append(mostrarTotal)
   })
 }
-
-
 
 const eliminarProducto = () => {
   const foundId = carrito.find(elemento => elemento.id)
@@ -105,6 +93,8 @@ const eliminarProducto = () => {
   })
 
   renderizar()
+
+
 }
 
 
