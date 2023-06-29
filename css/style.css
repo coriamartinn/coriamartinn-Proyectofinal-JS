@@ -142,6 +142,7 @@
 .carrito-content {
     background-color: #eeeeee;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
@@ -150,12 +151,19 @@
     border-radius: 2rem;
 }
 
+.li-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
 
-
-.title-carrito {
-    font-size: 2rem;
+.title-carrito,
+.title-total {
+    font-size: 1.5rem;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    font-weight: bold;
 }
 
 .cerrar-boton {
@@ -197,6 +205,13 @@
 
 
 
-.eliminar-producto{
+.boton-eliminar{
+    background-color: #000;
+    color: #fff;
+    padding: .5rem;
+    border-radius: 1rem;
+    border: none;
     cursor: pointer;
 }
+
+
