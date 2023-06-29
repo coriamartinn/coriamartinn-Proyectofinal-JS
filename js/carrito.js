@@ -4,7 +4,7 @@ const cantidadContador = () => {
   let contadorCarrito = document.getElementById('cantidadCarrito')
   contadorCarrito.innerText = `${carrito.length}`
 }
-
+cantidadContador()
 
 const abrirYcerrarCarrito = () => {
   const abrirCarrito = document.getElementById("verCarrito")
