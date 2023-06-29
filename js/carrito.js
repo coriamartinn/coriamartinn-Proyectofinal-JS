@@ -29,7 +29,7 @@ const renderizar = (ArrayDeProductos) => {
     
     cardProductos.innerHTML = `
     <h2 class="title">${producto.nombre}</h2>
-    <img class="imagen-producto" src="img/${producto.rutaImagen}">
+    <img class="imagen-producto" src="../img/${producto.rutaImagen}">
     <p class="title-precio">$${producto.precio}</p>
     <button id="agregar-${producto.id}" class="btn">Agregar al Carrito</button>
     `
