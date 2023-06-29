@@ -145,12 +145,12 @@
 .carrito-cantidad{
     position:absolute;
     text-align: center;
-    background-color: #202bc2;
-    color: #cecece;
-    border-radius: 100%;
+    background-color: #ff0000;
+    color: #000000;
+    border-radius: 50%;
     padding: 4px;
-    top: 42px;
-    right: 15px;
+    top: 40px;
+    right: 17px;
 }
 
 .carrito-content {
