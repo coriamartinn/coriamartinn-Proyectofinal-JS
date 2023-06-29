@@ -1,10 +1,4 @@
-
-
-
-
-
-let carrito = []
-
+let carrito = JSON.parse(localStorage.getItem("carrito"))
 
 const abrirCarrito = document.getElementById("verCarrito")
 
@@ -16,7 +10,7 @@ const abrirCarrito = document.getElementById("verCarrito")
 
 let carritoContainer = document.getElementById("carritoContainer")
 
-renderizar(productos)
+
 function renderizar(ArrayDeProductos){
   let contenedor = document.getElementById("container")
   contenedor.innerHTML = ""
@@ -51,6 +45,8 @@ function AgregarAlCarrito(id){
 
     carrito.push(producto)
   }
+
+  localStorage.setItem("carrito", JSON.stringify(carrito))
 
   mostrarCarrito()
 }
@@ -88,25 +84,19 @@ const mostrarCarrito = () => {
   })
 }
 else {
-  // Si el carrito está vacío, muestro un texto
-  contenedorCarrito.innerHTML = '<p class="title">No hay productos</p>';
+  
+  contenedorCarrito.innerHTML = '<p class="title">No hay productos</p>'
 }
 }
-
-
-
-
-
 
 
 const eliminarProducto = (id) => {
   carrito = carrito.filter((producto) => producto.id != id)
 
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+
   mostrarCarrito()
 }
-
-
-
 
 
 const mostrarTotal = (contenedor) => {
@@ -115,6 +105,8 @@ const mostrarTotal = (contenedor) => {
 }
 
 
+renderizar(productos)
+mostrarCarrito()
 
 
 
@@ -134,45 +126,3 @@ const mostrarTotal = (contenedor) => {
 
 
 
-
-
-  /* BtnCarrito.addEventListener("click", (e) => {
-    e.preventDefault()
-    carrito.push({
-      rutaImagen: producto.rutaImagen,
-      nombre: producto.nombre,
-      precio: producto.precio,
-    })
-
-    let total = carrito.reduce((acc, el) => acc + el.precio, 0)
-
-    
-
-    let carritoContent = document.createElement("div")
-    carritoContent.classList.add("carrito-content")
-    carritoContent.innerHTML= `
-    <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
-    <h2 class="title">${producto.nombre}</h2>
-    <p class="title-precio">$${producto.precio}</p>
-    `
-    
-    carritoContainer.append(carritoContent)
-    
-    let eliminar = document.createElement("span")
-    eliminar.innerText ="❌"
-    eliminar.classList.add("eliminar-producto")
-    carritoContent.append(eliminar)
-
-    eliminar.addEventListener("click", eliminarProducto)
-
-
-
-    let mostrarTotal = document.getElementById("total")
-    mostrarTotal.innerHTML=`
-    El total de tu carrito es: $${total}
-    `
-
-    carritoContainer.append(mostrarTotal)
-
-
-  }) */
