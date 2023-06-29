@@ -44,9 +44,8 @@ function renderizar(ArrayDeProductos){
     
   })
 }
-let BtnCarrito = document.getElementById(productos.id)
-
-
+let BtnCarrito = document.querySelectorAll("btn")
+BtnCarrito.addEventListener("click", AgregarAlCarrito)
 
 function AgregarAlCarrito(producto){
   
