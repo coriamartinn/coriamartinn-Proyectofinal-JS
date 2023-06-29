@@ -105,6 +105,8 @@ else {
   
   contenedorCarrito.innerHTML = '<p class="title">No hay productos</p>'
 }
+
+cantidadContador()
 }
 
 
@@ -149,11 +151,15 @@ const decrementarProducto = (id) => {
 }
 
 
+
+const cantidadContador = () => {
+  let contador = document.getElementById('cantidadContador')
+  contador.innerContent=`${carrito.length}`
+}
+
+
 renderizar(productos)
 mostrarCarrito()
-
-
-
 
 
 
