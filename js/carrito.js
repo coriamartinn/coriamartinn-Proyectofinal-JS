@@ -11,7 +11,7 @@ const abrirCarrito = document.getElementById("verCarrito")
 let carritoContainer = document.getElementById("carritoContainer")
 
 
-function renderizar(ArrayDeProductos){
+const renderizar = (ArrayDeProductos) => {
   let contenedor = document.getElementById("container")
   contenedor.innerHTML = ""
 
@@ -37,7 +37,7 @@ function renderizar(ArrayDeProductos){
 }
 
 
-function AgregarAlCarrito(id){
+const AgregarAlCarrito = (id) => {
 
   if (!carrito.some((producto) => producto.id === id)){
 
@@ -77,7 +77,9 @@ const mostrarCarrito = () => {
     <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
     <h2 class="title">${producto.nombre}</h2>
     <p class="title-precio">$${producto.precio}</p>
+    <button id="decrementar-${producto.id}" class="boton-decrementar">-</button>
     <p class="title-precio">${producto.cantidad}u.</p>
+    <button id="incrementar-${producto.id}" class="boton-incrementar">+</button>
     </div>
     <button id="eliminar-${producto.id}" class="boton-eliminar">Eliminar</button>
   ` 
@@ -86,6 +88,16 @@ const mostrarCarrito = () => {
   const botonEliminar = document.getElementById(`eliminar-${producto.id}`)
   botonEliminar.addEventListener("click", () =>{
     eliminarProducto(producto.id)
+    })
+
+    const decrementar = document.getElementById(`decrementar-${producto.id}`)
+    decrementar.addEventListener("click", () => {
+      decrementarProducto(producto.id)
+    })
+
+    const incrementar = document.getElementById(`incrementar-${producto.id}`)
+    incrementar.addEventListener("click", () => {
+      incrementarProducto(producto.id)
     })
   })
 }
@@ -108,6 +120,32 @@ const eliminarProducto = (id) => {
 const mostrarTotal = (contenedor) => {
   const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
   contenedor.textContent = `Total: $ ${total}`
+}
+
+
+
+const incrementarProducto = (id) => {
+  const producto = carrito.find((elemento) => elemento.id === id)
+  producto.cantidad++
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+
+  mostrarCarrito()
+}
+
+const decrementarProducto = (id) => {
+  const producto = carrito.find((elemento) => elemento.id === id)
+
+  if(producto.cantidad === 1){
+    eliminarProducto(producto.id)
+  }
+  else{
+    producto.cantidad--
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    mostrarCarrito()
+  }
 }
 
 
