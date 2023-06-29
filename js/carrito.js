@@ -1,17 +1,19 @@
 let carrito = JSON.parse(localStorage.getItem("carrito"))
 
+const cantidadContador = () => {
+  let contadorCarrito = document.getElementById('cantidadCarrito')
+  contadorCarrito.innerText = `${carrito.length}`
+}
+cantidadContador()
+
+
 const abrirCarrito = document.getElementById("verCarrito")
 
   abrirCarrito.addEventListener("click", () => {
   carritoContainer.classList.toggle("oculto")
 })
 
-const cantidadContador = () => {
-  let contadorCarrito = document.getElementById('cantidadContador')
-  contadorCarrito.innerText = `${carrito.length}`
-}
 
-cantidadContador()
 
 let carritoContainer = document.getElementById("carritoContainer")
 
