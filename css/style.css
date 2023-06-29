@@ -151,6 +151,12 @@
     border-radius: 2rem;
 }
 
+.carrito-content-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .li-content{
     display: flex;
     align-items: center;

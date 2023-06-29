@@ -43,7 +43,10 @@ function AgregarAlCarrito(id){
 
     const producto = productos.find((producto) => producto.id === id)
 
-    carrito.push(producto)
+    carrito.push({...producto, cantidad: 1})
+  }else{
+    const producto = carrito.find((producto) => producto.id === id)
+    producto.cantidad++
   }
 
   localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -70,9 +73,12 @@ const mostrarCarrito = () => {
     const li = document.createElement("li")
     li.classList.add("li-content")
     li.innerHTML= `
+    <div class="carrito-content-div">
     <img class="imagen-carrito" src="../img/${producto.rutaImagen}">
     <h2 class="title">${producto.nombre}</h2>
     <p class="title-precio">$${producto.precio}</p>
+    <p class="title-precio">${producto.cantidad}u.</p>
+    </div>
     <button id="eliminar-${producto.id}" class="boton-eliminar">Eliminar</button>
   ` 
   carritoContent.append(li)
@@ -100,7 +106,7 @@ const eliminarProducto = (id) => {
 
 
 const mostrarTotal = (contenedor) => {
-  const total = carrito.reduce((acc, el) => acc + el.precio, 0)
+  const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
   contenedor.textContent = `Total: $ ${total}`
 }
 
