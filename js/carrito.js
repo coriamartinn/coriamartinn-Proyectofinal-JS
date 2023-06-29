@@ -6,7 +6,12 @@ const abrirCarrito = document.getElementById("verCarrito")
   carritoContainer.classList.toggle("oculto")
 })
 
+const cantidadContador = () => {
+  let contadorCarrito = document.getElementById('cantidadContador')
+  contadorCarrito.innerText=`${carrito.length}`
+}
 
+cantidadContador()
 
 let carritoContainer = document.getElementById("carritoContainer")
 
@@ -51,6 +56,7 @@ const AgregarAlCarrito = (id) => {
 
   localStorage.setItem("carrito", JSON.stringify(carrito))
 
+  cantidadContador()
   mostrarCarrito()
 }
 
@@ -152,10 +158,7 @@ const decrementarProducto = (id) => {
 
 
 
-const cantidadContador = () => {
-  let contador = document.getElementById('cantidadContador')
-  contador.innerContent=`${carrito.length}`
-}
+
 
 
 renderizar(productos)

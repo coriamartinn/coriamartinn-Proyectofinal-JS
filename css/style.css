@@ -138,6 +138,20 @@
 }
 
 
+.carrito-full {
+    position: relative;
+}
+
+.carrito-cantidad{
+    position:absolute;
+    text-align: center;
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: .6rem;
+    top: 42px;
+    right: 15px;
+}
 
 .carrito-content {
     background-color: #eeeeee;
@@ -233,18 +247,7 @@
 }
 
 
-.cantidad-contador {
-    text-align: center;
-    background-color: #000;
-    color: #cecece;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 4px;
-    position: absolute;
-    top: 37px;
-    right: 14px;
 
-}
 
 .carrito{
     padding: 0 .5rem;
