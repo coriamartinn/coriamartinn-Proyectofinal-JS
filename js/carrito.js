@@ -2,7 +2,7 @@ let carrito = JSON.parse(localStorage.getItem("carrito"))
 
 const cantidadContador = () => {
   let contadorCarrito = document.getElementById('cantidadCarrito')
-  contadorCarrito.innerText = `${carrito.length}`
+  contadorCarrito.innerText = carrito.length
 }
 cantidadContador()
 
