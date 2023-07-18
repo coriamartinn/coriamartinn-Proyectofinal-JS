@@ -205,10 +205,9 @@ const mostrarNotificacionEliminar = () => {
 }
 
 
-renderizar(productos)
+
+
 mostrarCarrito()
-
-
 
 
 
@@ -217,9 +216,9 @@ mostrarCarrito()
 
 fetch("./js/productos.json")
 .then(response => response.json())
-.then((datos) => {
-  renderizar(datos)
-  mostrarCarrito()
+.then((productos) => {
+  renderizar(productos)
+  AgregarAlCarrito()
 })
 
 
