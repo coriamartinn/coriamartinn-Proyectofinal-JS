@@ -61,11 +61,12 @@ const AgregarAlCarrito = (id) => {
     producto.cantidad++
   }
 
-  mostrarNotificacion()
+  
   localStorage.setItem("carrito", JSON.stringify(carrito))
 
   cantidadContador()
   mostrarCarrito()
+  mostrarNotificacion()
 }
 
 
@@ -213,12 +214,10 @@ mostrarCarrito()
 
 
 
-
 fetch("./js/productos.json")
 .then(response => response.json())
 .then((productos) => {
   renderizar(productos)
-  AgregarAlCarrito()
 })
 
 
